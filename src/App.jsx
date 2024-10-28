@@ -16,7 +16,10 @@ function App() {
 
   const fetchPollResults = async () => {
     try {
-      const response = await axios.get(`${API_BASE}/results?pollId=1`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE}/results?pollId=1`
+      );
+
       console.log("Fetched poll results:", response.data); // Log response to verify structure
       // Ensure correct data structure and update poll state
       setPoll({
@@ -32,7 +35,11 @@ function App() {
 
   const handleVote = async (option) => {
     try {
-      await axios.post(`${API_BASE}/vote`, { pollId: "1", option });
+      await axios.post(`${import.meta.env.VITE_API_BASE}/vote`, {
+        pollId: "1",
+        option,
+      });
+
       setSelectedOption(option);
       setShowResults(true);
       fetchPollResults(); // Re-fetch the updated results after voting
